@@ -1,12 +1,32 @@
 PODS:
   - Alamofire (4.2.0)
+  - Commons (0.1)
+  - SwiftCommons (0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.2)
+  - Commons (from `https://github.com/mdermejian/Commons.git`)
+  - SwiftCommons (from `https://github.com/mdermejian/SwiftCommons.git`)
+
+EXTERNAL SOURCES:
+  Commons:
+    :git: https://github.com/mdermejian/Commons.git
+  SwiftCommons:
+    :git: https://github.com/mdermejian/SwiftCommons.git
+
+CHECKOUT OPTIONS:
+  Commons:
+    :commit: 00a272cceff8cf96cb0bdcda689226ae71943533
+    :git: https://github.com/mdermejian/Commons.git
+  SwiftCommons:
+    :commit: dc3d58fe7bf818bce21002069eb1bbae94dd9d0a
+    :git: https://github.com/mdermejian/SwiftCommons.git
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Commons: c259d06ad51295713f408d29273f252c8409d9ec
+  SwiftCommons: ebd24e22bce59c839a7f7d41bda7dd02b6b9d7aa
 
-PODFILE CHECKSUM: 7abc7786857cfa12d6c18a9c2ea54fd68b946c95
+PODFILE CHECKSUM: f2bda80d6ee6b0b01d668ed32c6d2e106221d556
 
 COCOAPODS: 1.0.1

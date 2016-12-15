@@ -1,0 +1,6 @@
+framework module SwiftCommons {
+  umbrella header "SwiftCommons-umbrella.h"
+
+  export *
+  module * { export * }
+}

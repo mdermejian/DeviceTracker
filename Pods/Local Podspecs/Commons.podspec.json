@@ -1,0 +1,26 @@
+{
+  "name": "Commons",
+  "version": "0.1",
+  "summary": "A compilation of Common iOS functions/methods/categories useful for all projects.",
+  "description": "A compilation of Common iOS functions/methods/categories useful for all projects, compiled into a CocoaTouch framework project",
+  "homepage": "https://github.com/mdermejian/Commons",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE.txt"
+  },
+  "authors": {
+    "MD": "mdermejian@fexco.com"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/mdermejian/Commons.git",
+    "tag": "v0.1"
+  },
+  "source_files": [
+    "Commons",
+    "Commons/**/*.{h,m}"
+  ],
+  "requires_arc": true
+}
