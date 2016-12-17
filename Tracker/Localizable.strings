@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Tracker
+
+  Created by Marc Dermejian on 17/12/2016.
+  Copyright © 2016 Marc Dermejian. All rights reserved.
+*/
+"Devices_Title" = "Devices";
+"Network_Error_Message_Title" = "Error";
+"Network_Error_Message_Body" = "Something went wrong :-(";
+"OK_Action" = "OK";

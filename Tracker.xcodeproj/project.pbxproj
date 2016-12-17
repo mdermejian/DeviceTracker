@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		2985CE8433FA75A4B9AC3FC9 /* Pods_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E69B58FFA4560EAA52D99D5 /* Pods_TrackerTests.framework */; };
 		6A087F33DF0AB6461E6A1A5E /* Pods_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3E5200FA9304A4635E9D40 /* Pods_Tracker.framework */; };
+		8060E4E01E0541FE00290CF3 /* DevicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4DF1E0541FE00290CF3 /* DevicesTableViewController.swift */; };
+		8060E4E21E05456600290CF3 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4E11E05456600290CF3 /* DeviceCell.swift */; };
+		8060E4E41E055B4200290CF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8060E4E31E055B4200290CF3 /* Localizable.strings */; };
+		8060E4E61E05656A00290CF3 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4E51E05656A00290CF3 /* DeviceDetailViewController.swift */; };
+		8060E4EB1E05A56400290CF3 /* CreateDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4EA1E05A56400290CF3 /* CreateDeviceViewController.swift */; };
 		80F8B19B1E02A0030046A705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B19A1E02A0030046A705 /* AppDelegate.swift */; };
 		80F8B1A01E02A0030046A705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B19E1E02A0030046A705 /* Main.storyboard */; };
 		80F8B1A21E02A0030046A705 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B1A11E02A0030046A705 /* Assets.xcassets */; };
@@ -42,6 +47,11 @@
 		1E69B58FFA4560EAA52D99D5 /* Pods_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2044F1634A3EC15F3B8BB748 /* Pods-TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrackerTests/Pods-TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		728C2A3E46F5B9318B0546C5 /* Pods-TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrackerTests/Pods-TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8060E4DF1E0541FE00290CF3 /* DevicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesTableViewController.swift; sourceTree = "<group>"; };
+		8060E4E11E05456600290CF3 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
+		8060E4E31E055B4200290CF3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		8060E4E51E05656A00290CF3 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
+		8060E4EA1E05A56400290CF3 /* CreateDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDeviceViewController.swift; sourceTree = "<group>"; };
 		80F8B1971E02A0030046A705 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80F8B19A1E02A0030046A705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		80F8B19F1E02A0030046A705 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +105,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8060E4E71E05717B00290CF3 /* Devices List */ = {
+			isa = PBXGroup;
+			children = (
+				8060E4DF1E0541FE00290CF3 /* DevicesTableViewController.swift */,
+				8060E4E11E05456600290CF3 /* DeviceCell.swift */,
+			);
+			name = "Devices List";
+			sourceTree = "<group>";
+		};
+		8060E4E81E05718400290CF3 /* Device Detail View */ = {
+			isa = PBXGroup;
+			children = (
+				8060E4E51E05656A00290CF3 /* DeviceDetailViewController.swift */,
+			);
+			name = "Device Detail View";
+			sourceTree = "<group>";
+		};
+		8060E4E91E05718E00290CF3 /* Create New Device */ = {
+			isa = PBXGroup;
+			children = (
+				8060E4EA1E05A56400290CF3 /* CreateDeviceViewController.swift */,
+			);
+			name = "Create New Device";
+			sourceTree = "<group>";
+		};
 		80F8B18E1E02A0030046A705 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +158,7 @@
 				80F8B1C11E02BADA0046A705 /* Protocols */,
 				80F8B1BE1E02B9DF0046A705 /* Model */,
 				80F8B1C01E02BA280046A705 /* Common */,
+				80F8B1D41E03E5FD0046A705 /* UI */,
 				80F8B1BF1E02BA230046A705 /* Support Files */,
 			);
 			path = Tracker;
@@ -152,6 +188,7 @@
 				80F8B1A11E02A0030046A705 /* Assets.xcassets */,
 				80F8B1A31E02A0030046A705 /* LaunchScreen.storyboard */,
 				80F8B1A61E02A0030046A705 /* Info.plist */,
+				8060E4E31E055B4200290CF3 /* Localizable.strings */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -192,6 +229,16 @@
 				80F8B1BC1E02B17B0046A705 /* DeviceStatus.swift */,
 			);
 			name = Unused;
+			sourceTree = "<group>";
+		};
+		80F8B1D41E03E5FD0046A705 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8060E4E71E05717B00290CF3 /* Devices List */,
+				8060E4E81E05718400290CF3 /* Device Detail View */,
+				8060E4E91E05718E00290CF3 /* Create New Device */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		BFC146691030ED688DF76C34 /* Frameworks */ = {
@@ -297,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80F8B1A51E02A0030046A705 /* LaunchScreen.storyboard in Resources */,
+				8060E4E41E055B4200290CF3 /* Localizable.strings in Resources */,
 				80F8B1A21E02A0030046A705 /* Assets.xcassets in Resources */,
 				80F8B1A01E02A0030046A705 /* Main.storyboard in Resources */,
 			);
@@ -411,12 +459,16 @@
 			files = (
 				80F8B1C31E02BAEF0046A705 /* ResponseObjectSerializable.swift in Sources */,
 				80F8B1CC1E02C3110046A705 /* DeviceManager.swift in Sources */,
+				8060E4E01E0541FE00290CF3 /* DevicesTableViewController.swift in Sources */,
 				80F8B1CA1E02BFC90046A705 /* JJError.swift in Sources */,
 				80F8B1C71E02BB0A0046A705 /* APIConfigurator.swift in Sources */,
 				80F8B1D21E02C4310046A705 /* Config.swift in Sources */,
+				8060E4E21E05456600290CF3 /* DeviceCell.swift in Sources */,
 				80F8B1BB1E02B1500046A705 /* Device.swift in Sources */,
+				8060E4E61E05656A00290CF3 /* DeviceDetailViewController.swift in Sources */,
 				80F8B1C51E02BAFD0046A705 /* ResponseCollectionSerializable.swift in Sources */,
 				80F8B1BD1E02B17B0046A705 /* DeviceStatus.swift in Sources */,
+				8060E4EB1E05A56400290CF3 /* CreateDeviceViewController.swift in Sources */,
 				80F8B19B1E02A0030046A705 /* AppDelegate.swift in Sources */,
 				80F8B1D01E02C3A80046A705 /* DeviceRouter.swift in Sources */,
 				80F8B1CE1E02C3810046A705 /* DeviceEndpoint.swift in Sources */,
