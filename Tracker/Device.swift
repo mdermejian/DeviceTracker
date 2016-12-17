@@ -11,7 +11,7 @@ import Alamofire
 import Commons
 import SwiftCommons
 
-struct Device: CustomStringConvertible, ResponseObjectSerializable, ResponseCollectionSerializable {
+struct Device: CustomStringConvertible, ResponseObjectSerializable, ResponseCollectionSerializable, JSONAble {
 
 	// MARK: - stored properties
 	
@@ -23,6 +23,32 @@ struct Device: CustomStringConvertible, ResponseObjectSerializable, ResponseColl
 	var lastCheckedOutDate: Date?
 	var lastCheckedOutBy: String?
 	
+	
+	// Mark: - computed properties
+	var status: String {
+		guard let isCheckedOut = isCheckedOut else { return "Available" }
+		
+		if !isCheckedOut {
+			return "Available"
+		}
+		
+		if let lastCheckedOutBy = lastCheckedOutBy {
+			return "Checked out by \(lastCheckedOutBy)"
+		}else {
+			return "Checked out"
+		}
+	}
+	
+	var deviceInfo: String {
+		var info = ""
+		if manufacturer != nil {
+			info += "\(manufacturer!) "
+		}
+		if device != nil {
+			info += "\(device!)"
+		}
+		return info
+	}
 
 	// MARK: - ResponseObjectSerializable protocol implementation
 	
