@@ -14,7 +14,7 @@ enum listing the Device end points
 enum DeviceEndpoint {
 	
 	case GetAllDevices
-	case CreateDevice(parameters: Parameters)
-	case UpdateDevice(id: Int, parameters: Parameters)
-	case DestroyDevice(id: Int)
+	case CreateDevice(parameters: [String: AnyObject])
+	case UpdateDevice(id: String, parameters: [String: AnyObject])
+	case DestroyDevice(id: String)
 }
