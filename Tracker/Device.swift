@@ -11,7 +11,7 @@ import Alamofire
 import Commons
 import SwiftCommons
 
-struct Device: CustomStringConvertible, ResponseObjectSerializable, ResponseCollectionSerializable, JSONAble {
+final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSerializable, JSONAble, NSCoding {
 
 	// MARK: - stored properties
 	
@@ -23,6 +23,10 @@ struct Device: CustomStringConvertible, ResponseObjectSerializable, ResponseColl
 	var lastCheckedOutDate: Date?
 	var lastCheckedOutBy: String?
 	
+	//MARK: Archiving Paths
+ 
+	static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+	static let ArchiveURL = DocumentsDirectory.appendingPathComponent("devices")
 	
 	// Mark: - computed properties
 	var status: String {
@@ -50,37 +54,69 @@ struct Device: CustomStringConvertible, ResponseObjectSerializable, ResponseColl
 		return info
 	}
 
+	// Mark: - init
+	init(device: String, os: String, manufacturer: String) {
+		self.device = device
+		self.os = os
+		self.manufacturer = manufacturer
+		self.isCheckedOut = false
+	}
+	
 	// MARK: - ResponseObjectSerializable protocol implementation
 	
 	fileprivate typealias Fields = DeviceKey
 	fileprivate typealias Value = AnyObject
 	
-	init?(response: HTTPURLResponse, representation: Any) {
+	required init?(response: HTTPURLResponse, representation: Any) {
 		
 		guard let representation = representation as? [String: AnyObject] else { return nil }
 		
-		if let id = representation[Fields.ID.rawValue] as? NSNumber { self.id = id.intValue }
-		if let device = representation[Fields.Device.rawValue] as? String { self.device = device }
-		if let os = representation[Fields.OS.rawValue] as? String { self.os = os }
-		if let manufacturer = representation[Fields.Manufacturer.rawValue] as? String { self.manufacturer = manufacturer }
-		if let isCheckedOut = representation[Fields.CheckedOut.rawValue] as? Bool { self.isCheckedOut = isCheckedOut }
-		if let lastCheckedOutDate = representation[Fields.LastCheckedOutDate.rawValue] as? String { self.lastCheckedOutDate = NSDate(fromRFC3339String: lastCheckedOutDate) as Date }
-		if let lastCheckedOutBy = representation[Fields.LastCheckedOutBy.rawValue] as? String{ self.lastCheckedOutBy = lastCheckedOutBy }
+		if let id = representation[Fields.ID] as? NSNumber { self.id = id.intValue }
+		if let device = representation[Fields.Device] as? String { self.device = device }
+		if let os = representation[Fields.OS] as? String { self.os = os }
+		if let manufacturer = representation[Fields.Manufacturer] as? String { self.manufacturer = manufacturer }
+		if let isCheckedOut = representation[Fields.CheckedOut] as? Bool { self.isCheckedOut = isCheckedOut }
+		if let lastCheckedOutDate = representation[Fields.LastCheckedOutDate] as? String { self.lastCheckedOutDate = NSDate(fromRFC3339String: lastCheckedOutDate) as Date }
+		if let lastCheckedOutBy = representation[Fields.LastCheckedOutBy] as? String{ self.lastCheckedOutBy = lastCheckedOutBy }
+	}
+
+	//MARK: - NSCoding
+	func encode(with aCoder: NSCoder) {
+		
+		aCoder.encode(id, forKey: Fields.ID)
+		aCoder.encode(device, forKey: Fields.Device)
+		aCoder.encode(os, forKey: Fields.OS)
+		aCoder.encode(manufacturer, forKey: Fields.Manufacturer)
+		aCoder.encode(isCheckedOut, forKey: Fields.CheckedOut)
+		aCoder.encode(lastCheckedOutDate, forKey: Fields.LastCheckedOutDate)
+		aCoder.encode(lastCheckedOutBy, forKey: Fields.LastCheckedOutBy)
+	}
+	
+	init?(coder aDecoder: NSCoder) {
+
+		super.init()
+		
+		id = aDecoder.decodeObject(forKey: Fields.ID) as? Int
+		device = aDecoder.decodeObject(forKey: Fields.Device) as? String
+		os = aDecoder.decodeObject(forKey: Fields.OS) as? String
+		manufacturer = aDecoder.decodeObject(forKey: Fields.Manufacturer) as? String
+		isCheckedOut = aDecoder.decodeObject(forKey: Fields.CheckedOut) as? Bool
+		lastCheckedOutDate = aDecoder.decodeObject(forKey: Fields.LastCheckedOutDate) as? Date
+		lastCheckedOutBy = aDecoder.decodeObject(forKey: Fields.LastCheckedOutBy) as? String
+		
 	}
 }
 
 // MARK: - API Keys
 
 // The keys to the values received in the API response
-// These do not represent the entirety of the response
-// we are only choosing a select few to parse and store
-public enum DeviceKey: String {
+struct DeviceKey {
 	
-	case ID						= "id"
-	case Device					= "device"
-	case OS						= "os"
-	case Manufacturer			= "manufacturer"
-	case CheckedOut				= "isCheckedOut"
-	case LastCheckedOutDate		= "lastCheckedOutDate"
-	case LastCheckedOutBy		= "lastCheckedOutBy"
+	static let ID					= "id"
+	static let Device				= "device"
+	static let OS					= "os"
+	static let Manufacturer			= "manufacturer"
+	static let CheckedOut			= "isCheckedOut"
+	static let LastCheckedOutDate	= "lastCheckedOutDate"
+	static let LastCheckedOutBy		= "lastCheckedOutBy"
 }
