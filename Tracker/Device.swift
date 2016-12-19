@@ -23,6 +23,8 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 	var lastCheckedOutDate: Date?
 	var lastCheckedOutBy: String?
 	
+	var syncStatus: SyncStatus = .none
+	
 	//MARK: Archiving Paths
  
 	static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -90,6 +92,7 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 		aCoder.encode(isCheckedOut, forKey: Fields.CheckedOut)
 		aCoder.encode(lastCheckedOutDate, forKey: Fields.LastCheckedOutDate)
 		aCoder.encode(lastCheckedOutBy, forKey: Fields.LastCheckedOutBy)
+		aCoder.encode(syncStatus.rawValue, forKey: Fields.SyncStatus)
 	}
 	
 	init?(coder aDecoder: NSCoder) {
@@ -103,8 +106,34 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 		isCheckedOut = aDecoder.decodeObject(forKey: Fields.CheckedOut) as? Bool
 		lastCheckedOutDate = aDecoder.decodeObject(forKey: Fields.LastCheckedOutDate) as? Date
 		lastCheckedOutBy = aDecoder.decodeObject(forKey: Fields.LastCheckedOutBy) as? String
-		
+		syncStatus = SyncStatus(rawValue: aDecoder.decodeObject(forKey: Fields.SyncStatus) as! String)!
 	}
+}
+
+// MARK: - CustomStringConvertible
+extension Device {
+	
+	var dictionaryRepresentation: [String : Any] {
+		
+		let representation =
+			[Fields.ID : "\(id)",
+			Fields.Device : device as Any,
+			Fields.OS : os as Any,
+			Fields.Manufacturer : manufacturer as Any,
+			Fields.CheckedOut : isCheckedOut as Any,
+			Fields.LastCheckedOutDate : lastCheckedOutDate as Any,
+			Fields.LastCheckedOutBy : lastCheckedOutBy as Any,
+			Fields.SyncStatus : syncStatus,
+		] as [String : Any]
+		
+		return representation
+	}
+	
+	override var description: String {
+		return dictionaryRepresentation.debugDescription
+	}
+	
+	
 }
 
 // MARK: - API Keys
@@ -119,4 +148,5 @@ struct DeviceKey {
 	static let CheckedOut			= "isCheckedOut"
 	static let LastCheckedOutDate	= "lastCheckedOutDate"
 	static let LastCheckedOutBy		= "lastCheckedOutBy"
+	static let SyncStatus			= "syncStatus"
 }
