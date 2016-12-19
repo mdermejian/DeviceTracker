@@ -14,6 +14,9 @@
 		8060E4E41E055B4200290CF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8060E4E31E055B4200290CF3 /* Localizable.strings */; };
 		8060E4E61E05656A00290CF3 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4E51E05656A00290CF3 /* DeviceDetailViewController.swift */; };
 		8060E4EB1E05A56400290CF3 /* CreateDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4EA1E05A56400290CF3 /* CreateDeviceViewController.swift */; };
+		80E707D91E06876A0054806C /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E707D81E06876A0054806C /* StorageManager.swift */; };
+		80E707DB1E06CA260054806C /* SyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E707DA1E06CA260054806C /* SyncStatus.swift */; };
+		80E707DD1E06CD940054806C /* SyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E707DC1E06CD940054806C /* SyncEngine.swift */; };
 		80F8B19B1E02A0030046A705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B19A1E02A0030046A705 /* AppDelegate.swift */; };
 		80F8B1A01E02A0030046A705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B19E1E02A0030046A705 /* Main.storyboard */; };
 		80F8B1A21E02A0030046A705 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B1A11E02A0030046A705 /* Assets.xcassets */; };
@@ -52,6 +55,9 @@
 		8060E4E31E055B4200290CF3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		8060E4E51E05656A00290CF3 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
 		8060E4EA1E05A56400290CF3 /* CreateDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDeviceViewController.swift; sourceTree = "<group>"; };
+		80E707D81E06876A0054806C /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		80E707DA1E06CA260054806C /* SyncStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncStatus.swift; sourceTree = "<group>"; };
+		80E707DC1E06CD940054806C /* SyncEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncEngine.swift; sourceTree = "<group>"; };
 		80F8B1971E02A0030046A705 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80F8B19A1E02A0030046A705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		80F8B19F1E02A0030046A705 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				80F8B1BA1E02B1500046A705 /* Device.swift */,
+				80E707DA1E06CA260054806C /* SyncStatus.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -219,6 +226,8 @@
 				80F8B1CD1E02C3810046A705 /* DeviceEndpoint.swift */,
 				80F8B1CF1E02C3A80046A705 /* DeviceRouter.swift */,
 				80F8B1D11E02C4310046A705 /* Config.swift */,
+				80E707D81E06876A0054806C /* StorageManager.swift */,
+				80E707DC1E06CD940054806C /* SyncEngine.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -457,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80E707DB1E06CA260054806C /* SyncStatus.swift in Sources */,
 				80F8B1C31E02BAEF0046A705 /* ResponseObjectSerializable.swift in Sources */,
 				80F8B1CC1E02C3110046A705 /* DeviceManager.swift in Sources */,
 				8060E4E01E0541FE00290CF3 /* DevicesTableViewController.swift in Sources */,
@@ -464,6 +474,7 @@
 				80F8B1C71E02BB0A0046A705 /* APIConfigurator.swift in Sources */,
 				80F8B1D21E02C4310046A705 /* Config.swift in Sources */,
 				8060E4E21E05456600290CF3 /* DeviceCell.swift in Sources */,
+				80E707DD1E06CD940054806C /* SyncEngine.swift in Sources */,
 				80F8B1BB1E02B1500046A705 /* Device.swift in Sources */,
 				8060E4E61E05656A00290CF3 /* DeviceDetailViewController.swift in Sources */,
 				80F8B1C51E02BAFD0046A705 /* ResponseCollectionSerializable.swift in Sources */,
@@ -472,6 +483,7 @@
 				80F8B19B1E02A0030046A705 /* AppDelegate.swift in Sources */,
 				80F8B1D01E02C3A80046A705 /* DeviceRouter.swift in Sources */,
 				80F8B1CE1E02C3810046A705 /* DeviceEndpoint.swift in Sources */,
+				80E707D91E06876A0054806C /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -64,6 +64,7 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="hbS-Be-xWV" id="0Ez-Fj-UOu"/>
                                     <outlet property="mainLabel" destination="MaR-Vk-8lc" id="89L-qt-n4g"/>
+                                    <segue destination="MoE-nk-RYZ" kind="show" identifier="ShowDeviceDetail" id="K1s-yD-pNc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -81,7 +82,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="loadingFooterView" destination="AT3-YS-etK" id="cB0-Kl-6uz"/>
-                        <segue destination="MoE-nk-RYZ" kind="show" id="bmQ-HW-4y9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgM-8M-P0J" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,7 +153,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="iI3-S7-JR1">
                             <connections>
-                                <action selector="saveTapped:" destination="HsH-2G-ZDd" id="Vdy-7s-SLw"/>
+                                <action selector="saveTapped:" destination="HsH-2G-ZDd" id="EQq-Ib-RPB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -162,9 +162,11 @@
                         <outlet property="manufacturerTextField" destination="da3-rx-q2Y" id="0Fx-UY-bk1"/>
                         <outlet property="osTextField" destination="bvw-rB-5w6" id="l5Q-cT-LV3"/>
                         <outlet property="saveButton" destination="iI3-S7-JR1" id="Oey-aB-Hsu"/>
+                        <segue destination="1aR-bL-cST" kind="unwind" identifier="unwindToDevicesTableView" unwindAction="unwindToDevicesViewWithSender:" id="SzD-Ki-Yr5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7I-RW-3a4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="1aR-bL-cST" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="JQz-ke-4Um">
                     <connections>
                         <action selector="dismissKeyboard:" destination="HsH-2G-ZDd" id="F1Y-BD-fBv"/>
@@ -185,25 +187,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Device: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbx-kI-7V5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbx-kI-7V5">
                                 <rect key="frame" x="75" y="72" width="284" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="OS: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH8-9e-8ib">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH8-9e-8ib">
                                 <rect key="frame" x="49" y="98" width="310" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Manufacturer: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuS-kn-6N3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuS-kn-6N3">
                                 <rect key="frame" x="121" y="124" width="238" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Last Checked Out: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpR-pP-S2f">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpR-pP-S2f">
                                 <rect key="frame" x="151" y="150" width="208" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
@@ -274,6 +276,13 @@
                             <constraint firstItem="kH8-9e-8ib" firstAttribute="top" secondItem="Pbx-kI-7V5" secondAttribute="bottom" constant="8" symbolic="YES" id="vQz-jL-nso"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ygK-cD-SE0">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="QwC-IW-t0F">
+                            <connections>
+                                <segue destination="fPg-Vu-u4C" kind="unwind" unwindAction="unwindToDevicesViewWithSender:" id="jJn-Lv-djH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="KTu-cn-7S4" id="Xt1-Qf-mLz"/>
                         <outlet property="checkInOutButton" destination="RZL-Oh-huY" id="GJ6-Gp-n9C"/>
@@ -284,6 +293,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3z-a0-2x5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fPg-Vu-u4C" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1692" y="-351.27436281859076"/>
         </scene>
