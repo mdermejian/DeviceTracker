@@ -19,9 +19,42 @@ class DeviceManager {
 	//hide the default init
 //	private init() {}
 	
-	//MARK: methods
 	
+//	private (set) var devices: [Device]? {
+//		get {
+//			return storageManager.loadDevices()
+//		}
+//		set {
+//			storageManager.save(devices: newValue!)
+//		}
+//	}
+	
+	private (set) var deletedDevices: [Device] {
+		get {
+			return storageManager.loadDeletedDevices()
+		}
+		set {
+			storageManager.save(deletedDevices: newValue)
+		}
+	}
+	
+	func add(deletedDevice device: Device) {
+		deletedDevices += [device]
+	}
+	
+	
+	let storageManager = StorageManager()
+
+	//MARK: Fetch devices
 	func getDevices(completion: @escaping (_ success: Bool, _ devices: [Device]?) -> Void) {
+		
+		let devices = storageManager.loadDevices()
+		if devices.count > 0 {
+			OperationQueue.main.addOperation {
+				completion(true, devices)
+			}
+			return
+		}
 		
 		let request = DeviceRouter(endpoint: .GetAllDevices)
 		Alamofire.request(request)
@@ -31,13 +64,20 @@ class DeviceManager {
 			.validate()
 			
 			//Use Generic Response Object Serialization to map the response into a GetAllDevicesResponse object
-			.responseCollection(completionHandler: { (response: DataResponse<[Device]>) in
+			.responseCollection { (response: DataResponse<[Device]>) in
+
+				if response.result.isSuccess, let devices = response.result.value {
+					self.storageManager.save(devices: devices)
+//					self.devices = devices
+				}
+				
 				OperationQueue.main.addOperation {
 					completion(response.result.isSuccess, response.result.value)
 				}
-			})
+			}
 	}
 	
+	// MARK: Create device
 	func create(device deviceParameters: [String: AnyObject], completion: @escaping (_ success: Bool, _ device: Device?) -> Void) {
 		
 		let request = DeviceRouter(endpoint: .CreateDevice(parameters: deviceParameters))
@@ -47,7 +87,7 @@ class DeviceManager {
 			//If validation fails, subsequent calls to response handlers will have an associated error.
 			.validate()
 			
-			
+			//Use Generic Response Object Serialization to map the response into a Device object
 			.responseObject { (response: DataResponse<Device>) in
 				OperationQueue.main.addOperation {
 					completion(response.result.isSuccess, response.result.value)
@@ -55,6 +95,7 @@ class DeviceManager {
 			}
 	}
 	
+	// MARK: Delete device
 	func delete(device deviceID: String, completion: @escaping (_ success: Bool) -> Void) {
 		
 		let request = DeviceRouter(endpoint: .DestroyDevice(id: deviceID))
@@ -69,36 +110,34 @@ class DeviceManager {
 					completion(response.result.isSuccess)
 				}
 			}
-
-			//Use Generic Response Object Serialization to map the response into a GetAllDevicesResponse object
-//			.responseCollection{ (response: DataResponse<[Device]>) in
-//				debugPrint(response)
-//				completion(response.result.isSuccess)
-				//				completion(response.result.isSuccess,
-				//				           response.result.value?.count,
-				//				           response.result.value?.hasMore,
-				//				           response.result.value?.devices)
-				
-//			}
 	}
 
-	func checkIn(device deviceID: String, completion: @escaping (_ success: Bool) -> Void) {
+	
+	// MARK: Check device in/out
+	func update(device: Device, completion: @escaping (_ success: Bool) -> Void) {
 		
-		let params = [DeviceKey.CheckedOut.rawValue : false.description]
+		if let isCheckedOut = device.isCheckedOut {
+			isCheckedOut
+				? checkOut(device: device.model!, person: device.lastCheckedOutBy!, date: device.lastCheckedOutDate!, completion: completion)
+				: checkIn(device: device.model!, completion: completion)
+		}
+	}
+
+	private func checkIn(device deviceID: String, completion: @escaping (_ success: Bool) -> Void) {
+		
+		let params = [DeviceKey.CheckedOut : false.description]
 		self.update(device: deviceID, params: params as [String : AnyObject], completion: completion)
 	}
 	
-	func checkOut(device deviceID: String, person: String, completion: @escaping (_ success: Bool) -> Void) {
+	private func checkOut(device deviceID: String, person: String, date: Date, completion: @escaping (_ success: Bool) -> Void) {
 		
-		let date = DateFormatter.shared().string(from: Date())
-		
-		let params = [DeviceKey.LastCheckedOutBy.rawValue : person as AnyObject,
-		              DeviceKey.LastCheckedOutDate.rawValue : date as AnyObject,
-		              DeviceKey.CheckedOut.rawValue : true.description as AnyObject
+		let date = Utility.iso8601DateFormatter.string(from: date)
+		let params = [DeviceKey.LastCheckedOutBy : person as AnyObject,
+		              DeviceKey.LastCheckedOutDate : date as AnyObject,
+		              DeviceKey.CheckedOut : true.description as AnyObject
 		              ]
 		
 		self.update(device: deviceID, params: params, completion: completion)
-
 
 	}
 	
@@ -108,19 +147,14 @@ class DeviceManager {
 		
 		Alamofire.request(request)
 			
-			
+			//Validates that the response has a status code in the default acceptable range of 200…299, and that the content type matches any specified in the Accept HTTP header field.
+			//If validation fails, subsequent calls to response handlers will have an associated error.
 			.validate()
 			
-			
 			.responseString { response in
-				
 				OperationQueue.main.addOperation {
 					completion(response.result.isSuccess)
 				}
-				
-				
 		}
-
 	}
-
 }

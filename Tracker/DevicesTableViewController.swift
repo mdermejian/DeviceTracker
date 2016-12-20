@@ -22,19 +22,21 @@ class DevicesTableViewController: UITableViewController {
 	//List of devices for the table view
 	private var devices: [Device] = []
 	
-	// MARK: Computed constants
-
-	private let deviceManager: DeviceManager = {
-		return DeviceManager()
-	}()
+	private let deviceManager = DeviceManager()
+	
+	
+	// MARK: Computed properties
+	// This will extract all devices that do not have a deleted sync status
+	var filteredDevices: [Device] {
+		return devices.filter { $0.syncStatus != .deleted }
+	}
 	
 	// MARK: Constants
-	
 	//Keep constants' scope as small as possible
 	private struct Constants {
 		static let CellReuseId = "DeviceCell"
 		
-		static let DeviceDetailViewSceneIdentifier = "DeviceDetail"
+		static let DeviceDetailViewSegueIdentifier = "ShowDeviceDetail"
 		static let CreateDeviceSegueIdentifier = "CreateDevice"
 		
 		static let Devices_Title = NSLocalizedString("Devices_Title", comment: "The title of the Devices table view")
@@ -55,12 +57,11 @@ class DevicesTableViewController: UITableViewController {
 		loadDevices()
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		tableView.isUserInteractionEnabled = true
-	}
-	
 	// MARK: Networking
+	
+//	@IBAction func refresh(_ sender: UIRefreshControl) {
+//		loadDevices()
+//	}
 	
 	private func loadDevices() {
 		
@@ -71,6 +72,7 @@ class DevicesTableViewController: UITableViewController {
 		deviceManager.getDevices { (success, _devices) in
 			
 			self.isLoading = false
+//			self.refreshControl?.endRefreshing()
 			
 			guard success == true, let _devices = _devices else {
 				
@@ -83,25 +85,10 @@ class DevicesTableViewController: UITableViewController {
 				return
 			}
 			
-//			self.devices = _devices
-//			OperationQueue.main.addOperation {
-//				self.tableView.reloadData()
-//			}
-
-			
-			var indexPaths: [IndexPath] = []
-			for device in _devices {
-				let row = self.devices.count
-				indexPaths += [IndexPath(row: row, section:0)]
-				self.devices += [device]
-			}
-			
+			self.devices = _devices
 			OperationQueue.main.addOperation {
-				self.tableView.beginUpdates()
-				self.tableView.insertRows(at: indexPaths, with: .fade)
-				self.tableView.endUpdates()
+				self.tableView.reloadData()
 			}
-			
 		}
 	}
 	
@@ -112,12 +99,14 @@ class DevicesTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//		return filteredDevices.count
 		return devices.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellReuseId, for: indexPath) as! DeviceCell
 		cell.device = devices[indexPath.row]
+//		cell.device = filteredDevices[indexPath.row]
 		return cell
 	}
 	
@@ -126,58 +115,97 @@ class DevicesTableViewController: UITableViewController {
 	// Override to support conditional editing of the table view.
 	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		// Return false if you do not want the specified item to be editable.
+//		return devices[indexPath.row].syncStatus != .deleted
 		return true
 	}
 	
 	// Override to support editing the table view.
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			deleteElement(atIndexPath: indexPath)
+			deleteDevice(atIndexPath: indexPath)
 		}
 	}
 	
-	private func deleteElement(atIndexPath indexPath: IndexPath) {
+	private func deleteDevice(atIndexPath indexPath: IndexPath) {
 		
-		guard let deviceID = devices[indexPath.row].id else { return }
+		let device = devices[indexPath.row]
 		
-		deviceManager.delete(device: "\(deviceID)") { [weak self] success in
-			// Delete the row from the data source
-			self?.devices.remove(at: indexPath.row)
-			self?.tableView.deleteRows(at: [indexPath], with: .fade)
-		}
-	}
-	
-	// MARK: - UITableViewDelegate
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		//update object's sync status so it is handled on the next sync cycle
+		device.syncStatus = .deleted
 		
-		tableView.isUserInteractionEnabled = false
-		guard let destinationViewController = storyboard?.instantiateViewController(withIdentifier: Constants.DeviceDetailViewSceneIdentifier) as? DeviceDetailViewController
-			else {
-				return
-		}
+		// Delete the row from the data source
+		devices.remove(at: indexPath.row)
+		tableView.deleteRows(at: [indexPath], with: .fade)
+
+		//update our storage
+		deviceManager.storageManager.save(devices: devices)
+		deviceManager.add(deletedDevice: device)
 		
-		destinationViewController.device = devices[indexPath.row]
-		destinationViewController.deviceManager = deviceManager
-		navigationController?.pushViewController(destinationViewController, animated: true)
+		//Attempt to sync
+		SyncEngine.shared.sync()
+
 		
+//		//locally created devices have id == nil
+//		//If created locally and never synced, id would remain nil
+//		//only send sync request if the id is not nil
+//		if device.id != nil {
+//			//Attempt to sync
+//			//SyncEngine.shared.deleteLocalObjects()
+//			SyncEngine.shared.sync()
+//		}
 	}
 	
 	// MARK: - Navigation
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
-		//Injecting the deviceManager object when presenting the CreateDeviceViewController
-		if segue.identifier == Constants.CreateDeviceSegueIdentifier {
-			if let navController = segue.destination as? UINavigationController,
-				let destinationVC = navController.topViewController as? CreateDeviceViewController {
-				destinationVC.deviceManager = deviceManager
+		if segue.identifier == Constants.DeviceDetailViewSegueIdentifier {
+			let deviceDetailViewController = segue.destination as! DeviceDetailViewController
+			
+			// Get the cell that generated this segue.
+			if let selectedDeviceCell = sender as? DeviceCell {
+				let indexPath = tableView.indexPath(for: selectedDeviceCell)!
+				let selectedDevice = devices[indexPath.row]
+				deviceDetailViewController.device = selectedDevice
 			}
 		}
 	}
-	
-	@IBAction func unwindToDevicesView(segue: UIStoryboardSegue) {
-	}
 
+	@IBAction func unwindToDevicesView(sender: UIStoryboardSegue) {
+		
+		// Device edited
+		if let sourceViewController = sender.source as? DeviceDetailViewController,
+			let device = sourceViewController.device,
+			let selectedIndexPath = tableView.indexPathForSelectedRow {
+			
+			// Update an existing device.
+			devices[selectedIndexPath.row] = device
+			tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+			deviceManager.storageManager.save(devices: devices)
+			
+			//Attempt to sync
+			//SyncEngine.shared.updateLocalObjects()
+			SyncEngine.shared.sync()
+
+		}
+		
+		// New device created
+		if let sourceViewController = sender.source as? CreateDeviceViewController,
+			let device = sourceViewController.device {
+			
+			// Add a new device.
+			let newIndexPath = IndexPath(row: devices.count, section: 0)
+			devices += [device]
+			
+			tableView.insertRows(at: [newIndexPath], with: .bottom)
+			
+			deviceManager.storageManager.save(devices: devices)
+
+			//Attempt to sync
+			SyncEngine.shared.sync()
+
+		}
+	}
 
 }
 
