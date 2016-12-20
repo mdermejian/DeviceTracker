@@ -8,8 +8,3 @@
 
 import Foundation
 
-struct Config {
-	
-	static let baseURL = "http://private-1cc0f-devicecheckout.apiary-mock.com"
-	static let timeout = TimeInterval(30)
-}
