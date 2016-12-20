@@ -85,7 +85,6 @@ class DeviceRouter: URLRequestConvertible, APIConfigurator {
 		                                method: method,
 		                                headers: defaultHeaders)
 		urlRequest.timeoutInterval = timeoutInterval
-//		urlRequest.cachePolicy = cachePolicy //.returnCacheDataElseLoad
 		
 		return try encoding.encode(urlRequest, with: parameters)
 		
