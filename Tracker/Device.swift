@@ -16,7 +16,7 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 	// MARK: - stored properties
 	
 	var id: Int?
-	var device: String?
+	var model: String?
 	var os: String?
 	var manufacturer: String?
 	var isCheckedOut: Bool?
@@ -50,15 +50,15 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 		if manufacturer != nil {
 			info += "\(manufacturer!) "
 		}
-		if device != nil {
-			info += "\(device!)"
+		if model != nil {
+			info += "\(model!)"
 		}
 		return info
 	}
 
 	// Mark: - init
 	init(device: String, os: String, manufacturer: String) {
-		self.device = device
+		self.model = device
 		self.os = os
 		self.manufacturer = manufacturer
 		self.isCheckedOut = false
@@ -74,7 +74,7 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 		guard let representation = representation as? [String: AnyObject] else { return nil }
 		
 		if let id = representation[Fields.ID] as? NSNumber { self.id = id.intValue }
-		if let device = representation[Fields.Device] as? String { self.device = device }
+		if let device = representation[Fields.Device] as? String { self.model = device }
 		if let os = representation[Fields.OS] as? String { self.os = os }
 		if let manufacturer = representation[Fields.Manufacturer] as? String { self.manufacturer = manufacturer }
 		if let isCheckedOut = representation[Fields.CheckedOut] as? Bool { self.isCheckedOut = isCheckedOut }
@@ -86,7 +86,7 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 	func encode(with aCoder: NSCoder) {
 		
 		aCoder.encode(id, forKey: Fields.ID)
-		aCoder.encode(device, forKey: Fields.Device)
+		aCoder.encode(model, forKey: Fields.Device)
 		aCoder.encode(os, forKey: Fields.OS)
 		aCoder.encode(manufacturer, forKey: Fields.Manufacturer)
 		aCoder.encode(isCheckedOut, forKey: Fields.CheckedOut)
@@ -100,7 +100,7 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 		super.init()
 		
 		id = aDecoder.decodeObject(forKey: Fields.ID) as? Int
-		device = aDecoder.decodeObject(forKey: Fields.Device) as? String
+		model = aDecoder.decodeObject(forKey: Fields.Device) as? String
 		os = aDecoder.decodeObject(forKey: Fields.OS) as? String
 		manufacturer = aDecoder.decodeObject(forKey: Fields.Manufacturer) as? String
 		isCheckedOut = aDecoder.decodeObject(forKey: Fields.CheckedOut) as? Bool
@@ -117,7 +117,7 @@ extension Device {
 		
 		let representation =
 			[Fields.ID : "\(id)",
-			Fields.Device : device as Any,
+			Fields.Device : model as Any,
 			Fields.OS : os as Any,
 			Fields.Manufacturer : manufacturer as Any,
 			Fields.CheckedOut : isCheckedOut as Any,
