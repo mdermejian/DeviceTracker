@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gKD-5D-HEt" id="86q-47-zgg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaR-Vk-8lc">
@@ -218,10 +218,6 @@
                                     <action selector="checkInOut:" destination="MoE-nk-RYZ" eventType="touchUpInside" id="SmQ-np-h8j"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="KTu-cn-7S4">
-                                <rect key="frame" x="177" y="181" width="20" height="20"/>
-                                <color key="color" red="0.35484272239999998" green="0.64382117989999998" blue="0.35234868530000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCC-vN-sHc">
                                 <rect key="frame" x="20" y="72" width="55" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
@@ -254,7 +250,6 @@
                             <constraint firstItem="kH8-9e-8ib" firstAttribute="leading" secondItem="FOK-Wl-Dkj" secondAttribute="trailing" id="CIS-Lf-wJI"/>
                             <constraint firstItem="bpR-pP-S2f" firstAttribute="leading" secondItem="ayW-o3-Amb" secondAttribute="trailing" id="DNa-I8-M1d"/>
                             <constraint firstItem="MEB-nN-bxk" firstAttribute="top" secondItem="FOK-Wl-Dkj" secondAttribute="bottom" constant="8" symbolic="YES" id="DRa-yt-fUZ"/>
-                            <constraint firstItem="KTu-cn-7S4" firstAttribute="centerY" secondItem="RZL-Oh-huY" secondAttribute="centerY" id="F6U-DM-lb9"/>
                             <constraint firstItem="FOK-Wl-Dkj" firstAttribute="leading" secondItem="KCd-oR-Iq5" secondAttribute="leading" constant="20" symbolic="YES" id="Fnn-iU-pax"/>
                             <constraint firstItem="bpR-pP-S2f" firstAttribute="top" secondItem="OuS-kn-6N3" secondAttribute="bottom" constant="8" symbolic="YES" id="Jct-ZC-uzR"/>
                             <constraint firstItem="ayW-o3-Amb" firstAttribute="top" secondItem="MEB-nN-bxk" secondAttribute="bottom" constant="8" symbolic="YES" id="K5k-NC-Wqv"/>
@@ -272,7 +267,6 @@
                             <constraint firstItem="Pbx-kI-7V5" firstAttribute="leading" secondItem="lCC-vN-sHc" secondAttribute="trailing" id="j2V-py-1wg"/>
                             <constraint firstItem="OuS-kn-6N3" firstAttribute="top" secondItem="kH8-9e-8ib" secondAttribute="bottom" constant="8" symbolic="YES" id="mxc-Dn-WuN"/>
                             <constraint firstItem="lCC-vN-sHc" firstAttribute="top" secondItem="Xv3-F8-Lvl" secondAttribute="bottom" constant="8" symbolic="YES" id="sQc-RJ-Jdi"/>
-                            <constraint firstItem="KTu-cn-7S4" firstAttribute="centerX" secondItem="RZL-Oh-huY" secondAttribute="centerX" id="tn5-he-IHc"/>
                             <constraint firstItem="kH8-9e-8ib" firstAttribute="top" secondItem="Pbx-kI-7V5" secondAttribute="bottom" constant="8" symbolic="YES" id="vQz-jL-nso"/>
                         </constraints>
                     </view>
@@ -284,7 +278,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="KTu-cn-7S4" id="Xt1-Qf-mLz"/>
                         <outlet property="checkInOutButton" destination="RZL-Oh-huY" id="GJ6-Gp-n9C"/>
                         <outlet property="checkedOutLabel" destination="bpR-pP-S2f" id="lrt-on-Bkv"/>
                         <outlet property="deviceLabel" destination="Pbx-kI-7V5" id="0Yi-ke-Z6c"/>
