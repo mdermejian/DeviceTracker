@@ -25,11 +25,6 @@ final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSeri
 	
 	var syncStatus: SyncStatus = .none
 	
-	//MARK: Archiving Paths
- 
-	static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-	static let ArchiveURL = DocumentsDirectory.appendingPathComponent("devices")
-	
 	// Mark: - computed properties
 	var status: String {
 		guard let isCheckedOut = isCheckedOut else { return "Available" }
