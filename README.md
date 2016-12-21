@@ -16,27 +16,46 @@ Please open the project using Tracker.xcworkspace.
 ** Screen 3: Add Device Page: **
 This page will allow the user to add a new device. All fields on this page are required. If the user presses "Cancel" with some information filled in, please confirm they wish to lose all entered data. Pressing "Save" should verify there is information for all 3 fields, add the device, and return the user to the home page.
 
-### Setup ###
-* The project was developed using XCode 8.1 and Swift 3
-* Project tested on iPhone 6 running iOS 9.3.5 and iPhone 5S running iOS 10.1.1
-
 ### Endpoints ###
 
 Base URL: http://private-1cc0f-devicecheckout.apiary-mock.com
 *NOTE: This is a mock API. That means any requests to add or modify devices will not be reflected in later responses.*
 
 **GET /devices:**Gets a list of all devices.
+
 **POST /devices:** Adds a new device
+
 **POST /devices/{device_id}:** Updates an existing device. Replace {device_id} with the id of the device.
+
 **DELETE /devices/{device_id}:** Deletes a device. Replace {device_id} with the id of the device you wish to delete.
+
+
+### Offline Requirements ###
+
+The app must remain functional when the user does not have an internet connection. In order to accomplish this, you will need to implement a data storage mechanism. You are free to choose whatever data storage you feel would best suit this project. Upon reconnection to a network, the app must upload any devices created or modified while offline and fetch the latest set of devices from the backend.
+
+
+
 
 
 ### Architecture ###
 
 
-### How do I get set up? ###
+### Setup ###
 
-** Dependencies **
+** Developed using XCode 8.1 **
+
+** Written in Swift 3 **
+
+** Tested on iPhone 6 running iOS 9.3.5 and iPhone 5S running iOS 10.1.1 **
+
+** Runs on iOS 8.0 and higher **
+
+** Uses size classes and auto layout to support all iPhone screen sizes **
+
+
+
+### Dependencies ###
 
 1. Alamofire 4.2
 
