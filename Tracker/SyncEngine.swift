@@ -43,8 +43,6 @@ class SyncEngine {
 		var devices = storageManager.loadDevices()
 		for (index, device) in devices.enumerated() where device.syncStatus == .created {
 			
-			print("creating \(device) \n")
-			
 			let params = [DeviceKey.Device : device.model,
 						  DeviceKey.OS : device.os,
 						  DeviceKey.Manufacturer : device.manufacturer
@@ -86,8 +84,6 @@ class SyncEngine {
 		var deletedDevices = storageManager.loadDeletedDevices()
 		for device in deletedDevices {
 			
-			print("deleting \(device) \n")
-			
 			//locally created devices have id == nil
 			//If created locally and never synced, id would remain nil
 			//only send sync request if the id is not nil
@@ -119,9 +115,6 @@ class SyncEngine {
 		
 		var devices = storageManager.loadDevices()
 		for (index, device) in devices.enumerated() where device.syncStatus == .updated {
-			
-			print("updating \(device) \n")
-			
 			
 			let completionHandler: (Bool) -> (Void) = { (success) in
 				if success {
