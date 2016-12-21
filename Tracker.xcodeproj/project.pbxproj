@@ -15,6 +15,7 @@
 		8060E4E61E05656A00290CF3 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4E51E05656A00290CF3 /* DeviceDetailViewController.swift */; };
 		8060E4EB1E05A56400290CF3 /* CreateDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8060E4EA1E05A56400290CF3 /* CreateDeviceViewController.swift */; };
 		807463451E09534900933D74 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807463441E09534900933D74 /* Utility.swift */; };
+		807463471E0A6DB500933D74 /* DeviceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807463461E0A6DB500933D74 /* DeviceTest.swift */; };
 		80E707D91E06876A0054806C /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E707D81E06876A0054806C /* StorageManager.swift */; };
 		80E707DB1E06CA260054806C /* SyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E707DA1E06CA260054806C /* SyncStatus.swift */; };
 		80E707DD1E06CD940054806C /* SyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E707DC1E06CD940054806C /* SyncEngine.swift */; };
@@ -23,7 +24,6 @@
 		80F8B1A01E02A0030046A705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B19E1E02A0030046A705 /* Main.storyboard */; };
 		80F8B1A21E02A0030046A705 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B1A11E02A0030046A705 /* Assets.xcassets */; };
 		80F8B1A51E02A0030046A705 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B1A31E02A0030046A705 /* LaunchScreen.storyboard */; };
-		80F8B1B01E02A0030046A705 /* TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1AF1E02A0030046A705 /* TrackerTests.swift */; };
 		80F8B1BB1E02B1500046A705 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1BA1E02B1500046A705 /* Device.swift */; };
 		80F8B1BD1E02B17B0046A705 /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1BC1E02B17B0046A705 /* DeviceStatus.swift */; };
 		80F8B1C31E02BAEF0046A705 /* ResponseObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1C21E02BAEF0046A705 /* ResponseObjectSerializable.swift */; };
@@ -58,6 +58,7 @@
 		8060E4E51E05656A00290CF3 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
 		8060E4EA1E05A56400290CF3 /* CreateDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDeviceViewController.swift; sourceTree = "<group>"; };
 		807463441E09534900933D74 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		807463461E0A6DB500933D74 /* DeviceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTest.swift; sourceTree = "<group>"; };
 		80E707D81E06876A0054806C /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		80E707DA1E06CA260054806C /* SyncStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncStatus.swift; sourceTree = "<group>"; };
 		80E707DC1E06CD940054806C /* SyncEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncEngine.swift; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		80F8B1A41E02A0030046A705 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		80F8B1A61E02A0030046A705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80F8B1AB1E02A0030046A705 /* TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		80F8B1AF1E02A0030046A705 /* TrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTests.swift; sourceTree = "<group>"; };
 		80F8B1B11E02A0030046A705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80F8B1BA1E02B1500046A705 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		80F8B1BC1E02B17B0046A705 /* DeviceStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceStatus.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		80F8B1AE1E02A0030046A705 /* TrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				80F8B1AF1E02A0030046A705 /* TrackerTests.swift */,
+				807463461E0A6DB500933D74 /* DeviceTest.swift */,
 				80F8B1B11E02A0030046A705 /* Info.plist */,
 			);
 			path = TrackerTests;
@@ -499,7 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80F8B1B01E02A0030046A705 /* TrackerTests.swift in Sources */,
+				807463471E0A6DB500933D74 /* DeviceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
