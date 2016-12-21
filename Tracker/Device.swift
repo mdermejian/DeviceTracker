@@ -11,7 +11,7 @@ import Alamofire
 import Commons
 import SwiftCommons
 
-final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSerializable, JSONAble, NSCoding {
+final class Device: NSObject, ResponseObjectSerializable, ResponseCollectionSerializable, NSCoding {
 
 	// MARK: - stored properties
 	
@@ -127,7 +127,6 @@ extension Device {
 	override var description: String {
 		return dictionaryRepresentation.debugDescription
 	}
-	
 	
 }
 

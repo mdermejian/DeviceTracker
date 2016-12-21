@@ -10,7 +10,6 @@ import Foundation
 
 enum SyncStatus: String {
 	case none
-	case deleted
 	case created
 	case updated
 }

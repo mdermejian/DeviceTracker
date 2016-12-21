@@ -40,6 +40,8 @@ class CreateDeviceViewController: UIViewController, UITextFieldDelegate {
 		let device = Device(device: deviceTextField.text!,
 		              os: osTextField.text!,
 		              manufacturer: manufacturerTextField.text!)
+		
+		// Update object's sync status so it is handled on the next sync cycle
 		device.syncStatus = .created
 		return device
 	}

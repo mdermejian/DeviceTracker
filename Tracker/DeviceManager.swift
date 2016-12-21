@@ -13,22 +13,6 @@ This is the network controller for Device related API calls: it talks to the bac
 */
 class DeviceManager {
 	
-	//Singleton shared instance
-//	static let sharedManager = DeviceManager()
-	
-	//hide the default init
-//	private init() {}
-	
-	
-//	private (set) var devices: [Device]? {
-//		get {
-//			return storageManager.loadDevices()
-//		}
-//		set {
-//			storageManager.save(devices: newValue!)
-//		}
-//	}
-	
 	private (set) var deletedDevices: [Device] {
 		get {
 			return storageManager.loadDeletedDevices()
@@ -68,7 +52,6 @@ class DeviceManager {
 
 				if response.result.isSuccess, let devices = response.result.value {
 					self.storageManager.save(devices: devices)
-//					self.devices = devices
 				}
 				
 				OperationQueue.main.addOperation {

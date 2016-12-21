@@ -25,7 +25,6 @@
 		80F8B1A21E02A0030046A705 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B1A11E02A0030046A705 /* Assets.xcassets */; };
 		80F8B1A51E02A0030046A705 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80F8B1A31E02A0030046A705 /* LaunchScreen.storyboard */; };
 		80F8B1BB1E02B1500046A705 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1BA1E02B1500046A705 /* Device.swift */; };
-		80F8B1BD1E02B17B0046A705 /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1BC1E02B17B0046A705 /* DeviceStatus.swift */; };
 		80F8B1C31E02BAEF0046A705 /* ResponseObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1C21E02BAEF0046A705 /* ResponseObjectSerializable.swift */; };
 		80F8B1C51E02BAFD0046A705 /* ResponseCollectionSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1C41E02BAFD0046A705 /* ResponseCollectionSerializable.swift */; };
 		80F8B1C71E02BB0A0046A705 /* APIConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1C61E02BB0A0046A705 /* APIConfigurator.swift */; };
@@ -33,7 +32,6 @@
 		80F8B1CC1E02C3110046A705 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1CB1E02C3110046A705 /* DeviceManager.swift */; };
 		80F8B1CE1E02C3810046A705 /* DeviceEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1CD1E02C3810046A705 /* DeviceEndpoint.swift */; };
 		80F8B1D01E02C3A80046A705 /* DeviceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1CF1E02C3A80046A705 /* DeviceRouter.swift */; };
-		80F8B1D21E02C4310046A705 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8B1D11E02C4310046A705 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +70,6 @@
 		80F8B1AB1E02A0030046A705 /* TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80F8B1B11E02A0030046A705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80F8B1BA1E02B1500046A705 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
-		80F8B1BC1E02B17B0046A705 /* DeviceStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceStatus.swift; sourceTree = "<group>"; };
 		80F8B1C21E02BAEF0046A705 /* ResponseObjectSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObjectSerializable.swift; sourceTree = "<group>"; };
 		80F8B1C41E02BAFD0046A705 /* ResponseCollectionSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseCollectionSerializable.swift; sourceTree = "<group>"; };
 		80F8B1C61E02BB0A0046A705 /* APIConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConfigurator.swift; sourceTree = "<group>"; };
@@ -80,7 +77,6 @@
 		80F8B1CB1E02C3110046A705 /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		80F8B1CD1E02C3810046A705 /* DeviceEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceEndpoint.swift; sourceTree = "<group>"; };
 		80F8B1CF1E02C3A80046A705 /* DeviceRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceRouter.swift; sourceTree = "<group>"; };
-		80F8B1D11E02C4310046A705 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		AC3E5200FA9304A4635E9D40 /* Pods_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -140,6 +136,15 @@
 			name = "Create New Device";
 			sourceTree = "<group>";
 		};
+		807463481E0A7B2A00933D74 /* Sync & Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				80E707D81E06876A0054806C /* StorageManager.swift */,
+				80E707DC1E06CD940054806C /* SyncEngine.swift */,
+			);
+			name = "Sync & Persistence";
+			sourceTree = "<group>";
+		};
 		80F8B18E1E02A0030046A705 = {
 			isa = PBXGroup;
 			children = (
@@ -163,11 +168,11 @@
 		80F8B1991E02A0030046A705 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				80F8B1D31E02C6EB0046A705 /* Unused */,
 				80F8B1C01E02BA280046A705 /* Common */,
 				80F8B1C11E02BADA0046A705 /* Protocols */,
 				80F8B1BE1E02B9DF0046A705 /* Model */,
 				80F8B1C81E02BFAE0046A705 /* Networking */,
+				807463481E0A7B2A00933D74 /* Sync & Persistence */,
 				80F8B1D41E03E5FD0046A705 /* UI */,
 				80F8B1BF1E02BA230046A705 /* Support Files */,
 			);
@@ -231,19 +236,8 @@
 				80F8B1CB1E02C3110046A705 /* DeviceManager.swift */,
 				80F8B1CD1E02C3810046A705 /* DeviceEndpoint.swift */,
 				80F8B1CF1E02C3A80046A705 /* DeviceRouter.swift */,
-				80E707D81E06876A0054806C /* StorageManager.swift */,
-				80E707DC1E06CD940054806C /* SyncEngine.swift */,
 			);
 			name = Networking;
-			sourceTree = "<group>";
-		};
-		80F8B1D31E02C6EB0046A705 /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				80F8B1D11E02C4310046A705 /* Config.swift */,
-				80F8B1BC1E02B17B0046A705 /* DeviceStatus.swift */,
-			);
-			name = Unused;
 			sourceTree = "<group>";
 		};
 		80F8B1D41E03E5FD0046A705 /* UI */ = {
@@ -480,13 +474,11 @@
 				8060E4E01E0541FE00290CF3 /* DevicesTableViewController.swift in Sources */,
 				80F8B1CA1E02BFC90046A705 /* JJError.swift in Sources */,
 				80F8B1C71E02BB0A0046A705 /* APIConfigurator.swift in Sources */,
-				80F8B1D21E02C4310046A705 /* Config.swift in Sources */,
 				8060E4E21E05456600290CF3 /* DeviceCell.swift in Sources */,
 				80E707DD1E06CD940054806C /* SyncEngine.swift in Sources */,
 				80F8B1BB1E02B1500046A705 /* Device.swift in Sources */,
 				8060E4E61E05656A00290CF3 /* DeviceDetailViewController.swift in Sources */,
 				80F8B1C51E02BAFD0046A705 /* ResponseCollectionSerializable.swift in Sources */,
-				80F8B1BD1E02B17B0046A705 /* DeviceStatus.swift in Sources */,
 				8060E4EB1E05A56400290CF3 /* CreateDeviceViewController.swift in Sources */,
 				80F8B19B1E02A0030046A705 /* AppDelegate.swift in Sources */,
 				80F8B1D01E02C3A80046A705 /* DeviceRouter.swift in Sources */,

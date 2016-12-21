@@ -58,6 +58,7 @@ class DeviceDetailViewController: UIViewController {
 
 		device.isCheckedOut = false
 		
+		// Update object's sync status so it is handled on the next sync cycle
 		// Only set syncStatus to .updated if the deviceID is not nil
 		// a nil deviceID means the object was created locally and has not been synced yet
 		// In this case, do not set status to updated
@@ -73,6 +74,7 @@ class DeviceDetailViewController: UIViewController {
 		device.lastCheckedOutBy = name
 		device.lastCheckedOutDate = Date()
 		
+		// Update object's sync status so it is handled on the next sync cycle
 		// Only set syncStatus to .updated if the deviceID is not nil
 		// a nil deviceID means the object was created locally and has not been synced yet
 		// In this case, do not set status to updated

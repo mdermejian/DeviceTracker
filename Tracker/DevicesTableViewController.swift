@@ -25,12 +25,6 @@ class DevicesTableViewController: UITableViewController {
 	private let deviceManager = DeviceManager()
 	
 	
-	// MARK: Computed properties
-	// This will extract all devices that do not have a deleted sync status
-	var filteredDevices: [Device] {
-		return devices.filter { $0.syncStatus != .deleted }
-	}
-	
 	// MARK: Constants
 	//Keep constants' scope as small as possible
 	private struct Constants {
@@ -59,10 +53,6 @@ class DevicesTableViewController: UITableViewController {
 	
 	// MARK: Networking
 	
-//	@IBAction func refresh(_ sender: UIRefreshControl) {
-//		loadDevices()
-//	}
-	
 	private func loadDevices() {
 		
 		guard isLoading == false else { return }
@@ -72,7 +62,6 @@ class DevicesTableViewController: UITableViewController {
 		deviceManager.getDevices { (success, _devices) in
 			
 			self.isLoading = false
-//			self.refreshControl?.endRefreshing()
 			
 			guard success == true, let _devices = _devices else {
 				
@@ -99,14 +88,12 @@ class DevicesTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//		return filteredDevices.count
 		return devices.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellReuseId, for: indexPath) as! DeviceCell
 		cell.device = devices[indexPath.row]
-//		cell.device = filteredDevices[indexPath.row]
 		return cell
 	}
 	
@@ -115,7 +102,6 @@ class DevicesTableViewController: UITableViewController {
 	// Override to support conditional editing of the table view.
 	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		// Return false if you do not want the specified item to be editable.
-//		return devices[indexPath.row].syncStatus != .deleted
 		return true
 	}
 	
@@ -130,9 +116,6 @@ class DevicesTableViewController: UITableViewController {
 		
 		let device = devices[indexPath.row]
 		
-		//update object's sync status so it is handled on the next sync cycle
-		device.syncStatus = .deleted
-		
 		// Delete the row from the data source
 		devices.remove(at: indexPath.row)
 		tableView.deleteRows(at: [indexPath], with: .fade)
@@ -144,15 +127,6 @@ class DevicesTableViewController: UITableViewController {
 		//Attempt to sync
 		SyncEngine.shared.sync()
 
-		
-//		//locally created devices have id == nil
-//		//If created locally and never synced, id would remain nil
-//		//only send sync request if the id is not nil
-//		if device.id != nil {
-//			//Attempt to sync
-//			//SyncEngine.shared.deleteLocalObjects()
-//			SyncEngine.shared.sync()
-//		}
 	}
 	
 	// MARK: - Navigation

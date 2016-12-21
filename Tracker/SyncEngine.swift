@@ -26,7 +26,6 @@ class SyncEngine {
 		}
 	}
 	
-	
 	// MARK: - Sync
 	func sync () {
 		
