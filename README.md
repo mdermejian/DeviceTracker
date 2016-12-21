@@ -20,17 +20,32 @@ This page will allow the user to add a new device. All fields on this page are r
 * The project was developed using XCode 8.1 and Swift 3
 * Project tested on iPhone 6 running iOS 9.3.5 and iPhone 5S running iOS 10.1.1
 
+### Endpoints ###
+
+Base URL: http://private-1cc0f-devicecheckout.apiary-mock.com
+*NOTE: This is a mock API. That means any requests to add or modify devices will not be reflected in later responses.*
+
+**GET /devices:**Gets a list of all devices.
+**POST /devices:** Adds a new device
+**POST /devices/{device_id}:** Updates an existing device. Replace {device_id} with the id of the device.
+**DELETE /devices/{device_id}:** Deletes a device. Replace {device_id} with the id of the device you wish to delete.
+
+
 ### Architecture ###
 
 
 ### How do I get set up? ###
 
 ** Dependencies **
+
 1. Alamofire 4.2
+
 2. Commons (https://github.com/mdermejian/Commons.git
+
 3. SwiftCommons (https://github.com/mdermejian/SwiftCommons.git)
 
 ** Database configuration **
+
 Storage was implemented using NSArchiving.
 Device model adopts the NSCoding protocol. This capability provides the basis for archiving.
 Stored devices are stored in a "devices" file within the app's Documents directory in the app sandbox.
