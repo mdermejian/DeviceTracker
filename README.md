@@ -41,11 +41,30 @@ The app must remain functional when the user does not have an internet connectio
 ** NETWORKING **
 Networking uses Alamofire.
 
-Responses are 
+Responses use generic serialisation to 
 
 ** PERSISTENCE **
+Storage was implemented using NSArchiving.
+Device model adopts the NSCoding protocol. This capability provides the basis for archiving.
+
+Stored devices are stored in a "devices" file within the app's Documents directory in the app sandbox.
+
+Deleted devices are stored in a "deleted" file within the app's Documents directory in the app sandbox.
+
 
 ** SYNC **
+
+Synchronisation is triggered by the reachability manager, in the app delegate, detecting that the host is now reachable.
+
+When an object is created or edited, the syncStatus field is changed to reflect the need to have it synchronised.
+
+On the next sync cycle, all stored objects are inspected.
+SyncEngine will go through the list of devices stored on disk, check for the objects flagged either as created or updated, and then will attempt issue create/update requests to the backend. 
+
+If api call is successful, the sync flag is cleared, and the object is persisted in its new state.
+
+Deletion is handled differently where deleted objects are stored in a separate file. But the SyncEngine will deal with these objects the same way, calling the backend, and when successful removing the objects from the data store.
+
 
 ### Setup ###
 
@@ -68,10 +87,3 @@ Responses are
 2. Commons (https://github.com/mdermejian/Commons.git
 
 3. SwiftCommons (https://github.com/mdermejian/SwiftCommons.git)
-
-** Database configuration **
-
-Storage was implemented using NSArchiving.
-Device model adopts the NSCoding protocol. This capability provides the basis for archiving.
-Stored devices are stored in a "devices" file within the app's Documents directory in the app sandbox.
-Deleted devices are stored in a "deleted" file within the app's Documents directory in the app sandbox.
