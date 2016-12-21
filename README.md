@@ -38,14 +38,23 @@ The app must remain functional when the user does not have an internet connectio
 
 ### Architecture ###
 
-** NETWORKING **
-Networking uses Alamofire.
 
-Responses use generic serialisation to 
+** NETWORKING **
+Networking uses Alamofire. There are 3 layers that distribute the networking workload:
+
+1. **DeviceEndpoint:** enum with a separate case for each device backend call
+2. **DeviceRouter:** adopts the URLRequestConvertible protocol. This is in charge of building the URLRequest for the device API calls from the individual components. It holds a reference to the device endpoint enum
+3. **DeviceManager:** will make the actual Alamofire network calls and will handle the response
+4. **Device model:** represents a Device object. Implements NSCoding protocol to allow for persistence using NSArchiving. Also implements ResponseObjectSerializable and ResponseCollectionSerializable protocols.
+5. **Generic Response serialisers:** ResponseObjectSerializable and ResponseCollectionSerializable. When adopted, these protocols provide automatic, type-safe response object serialization into corresponding objects and array of objects respectively.
+
+
 
 ** PERSISTENCE **
 Storage was implemented using NSArchiving.
 Device model adopts the NSCoding protocol. This capability provides the basis for archiving.
+
+Persistence is handled by the **StorageManager** object
 
 Stored devices are stored in a "devices" file within the app's Documents directory in the app sandbox.
 
