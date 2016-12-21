@@ -21,7 +21,7 @@ This page will allow the user to add a new device. All fields on this page are r
 Base URL: http://private-1cc0f-devicecheckout.apiary-mock.com
 *NOTE: This is a mock API. That means any requests to add or modify devices will not be reflected in later responses.*
 
-**GET /devices:**Gets a list of all devices.
+**GET /devices:** Gets a list of all devices.
 
 **POST /devices:** Adds a new device
 
@@ -36,22 +36,28 @@ The app must remain functional when the user does not have an internet connectio
 
 
 
-
-
 ### Architecture ###
 
+** NETWORKING **
+Networking uses Alamofire.
+
+Responses are 
+
+** PERSISTENCE **
+
+** SYNC **
 
 ### Setup ###
 
-** Developed using XCode 8.1 **
+* Developed using XCode 8.1 
 
-** Written in Swift 3 **
+* Written in Swift 3 
 
-** Tested on iPhone 6 running iOS 9.3.5 and iPhone 5S running iOS 10.1.1 **
+* Tested on iPhone 6 running iOS 9.3.5 and iPhone 5S running iOS 10.1.1 
 
-** Runs on iOS 8.0 and higher **
+* Runs on iOS 8.0 and higher 
 
-** Uses size classes and auto layout to support all iPhone screen sizes **
+* Uses size classes and auto layout to support all iPhone screen sizes
 
 
 
